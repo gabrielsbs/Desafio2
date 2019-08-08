@@ -1,0 +1,75 @@
+.title{
+  text-align: center;
+  color: rgb(35, 120, 206)
+}
+.root {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 40%
+  }
+.rootb {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 40%
+  }
+.MuiToggleButtonGroup-root{
+  width: 100%;
+}
+.input {
+    height: 45px;
+    margin-left: 5px;
+  }
+@media only screen and (max-width: 800px){
+  .root {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 520px){
+  .root {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 95%;
+  }
+}
+@media only screen and (max-width: 880px){
+  .MuiButtonGroup-root.MuiButtonGroup-contained.MuiButtonGroup-fullWidth{
+    
+  }
+  .rootb {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 60%
+  }
+}
+
+@media only screen and (max-width: 640px){
+  .MuiButtonGroup-root.MuiButtonGroup-contained.MuiButtonGroup-fullWidth{
+    
+  }
+  .rootb {
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 85%
+  }
+}
+
+@media only screen and (max-width: 440px){
+  .MuiButtonGroup-root.MuiButtonGroup-contained.MuiButtonGroup-fullWidth{
+    display: block
+  }
+
+}
+
+
+.iconButton{
+    padding: 10px;
+    float: right;
+  }
