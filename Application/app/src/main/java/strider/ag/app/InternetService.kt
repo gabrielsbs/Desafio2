@@ -58,6 +58,7 @@ class InternetService: IntentService("Internet Service") {
     val PUT_RESULT_CODE = 3
     val INVALID_URL_CODE = 1
     val ERROR_CODE = 2
+    val PUT_ERROR_CODE = 4
 
 
 
@@ -83,7 +84,6 @@ class InternetService: IntentService("Internet Service") {
                         val result = Intent()
                         var string: String? = null
                         string = buffer.bufferedReader().readLine()
-                        Log.d("HttpClient", string)
                         result.putExtra(RSS_RESULT_EXTRA, string)
                         reply.send(this, RESULT_CODE, result)
 
@@ -116,15 +116,13 @@ class InternetService: IntentService("Internet Service") {
                     put.entity = entityBuilder.build()
 
                     val response = httpClient.execute(put)
-                    Log.d("HTTP PUT", response.toString())
                     val result = Intent()
                     result.putExtra("PutResponse",response.toString())
                     reply.send(this, PUT_RESULT_CODE, result)
                 }catch (exc: MalformedURLException) {
-                    reply.send(INVALID_URL_CODE);
+                    reply.send(INVALID_URL_CODE)
                 }catch (exc: Exception) {
-                    // could do better by treating the different sax/xml exceptions individually
-                    reply.send(ERROR_CODE)
+                    reply.send(PUT_ERROR_CODE)
                 }
             }
         }

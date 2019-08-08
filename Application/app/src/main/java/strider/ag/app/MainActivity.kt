@@ -38,10 +38,11 @@ class MainActivity : AppCompatActivity() {
     val GET_REQUEST = "pending"
     val PUT_REQUEST = "taskDone"
     val IMAGE = "image"
-    val HTTP_REQUEST = 4
     val RESULT_CODE = 0
+    val HTTP_REQUEST = 1
     val ERROR_CODE = 2
     val PUT_RESULT_CODE = 3
+    val PUT_ERROR_CODE = 4
 
     val REQUEST_IMAGE_CAPTURE = 300
     val PERMISSION_CODE = 100
@@ -261,22 +262,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun changePopupWindow(){
+    private fun changePopupWindow(success: Boolean){
         val progressBar = popupView.findViewById<ProgressBar>(R.id.progressBar1)
         progressBar.visibility = View.GONE
-        val textMsg = popupView.findViewById<TextView>(R.id.textMsg)
-        textMsg.text = "Solução enviada"
         val button = popupView.findViewById<Button>(R.id.cancelButton)
         button.visibility = View.VISIBLE
         button.setOnClickListener{
             popupWindow.dismiss()
         }
-        removeConcludedTask()
+        val textMsg = popupView.findViewById<TextView>(R.id.textMsg)
+        if(success){
+            textMsg.text = "Solução enviada"
+            removeConcludedTask()
+        }else{
+            textMsg.text = "Erro no envio da solução"
+        }
+
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE) {
-            Toast.makeText(this,"Fim da Atividade",Toast.LENGTH_SHORT).show()
             getLastLocation()
         }else if(requestCode == HTTP_REQUEST){
             if(resultCode == RESULT_CODE){
@@ -285,7 +292,9 @@ class MainActivity : AppCompatActivity() {
             }else if(resultCode == ERROR_CODE){
                 Log.d("Activity Result","error")
             }else if(resultCode == PUT_RESULT_CODE){
-                changePopupWindow()
+                changePopupWindow(true)
+            }else if(resultCode == PUT_ERROR_CODE){
+                changePopupWindow(false)
             }
             else{
                 Log.d("Activity Result","shit")
